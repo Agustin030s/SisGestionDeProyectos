@@ -1,0 +1,50 @@
+﻿@{
+    ViewBag.Title = "Inicio";
+}
+
+<div class="jumbotron">
+    @if (Request.IsAuthenticated)
+    {
+        <h1>Hola @Common.CurrentUser.Get.Name</h1>
+        <p class="lead">Es un gusto volverte a ver!</p>
+    }
+    else
+    {
+        <h1>Sistema de Gestión de Proyectos</h1>
+        <p class="lead">Inicie Sesión para comenzar.</p>
+        <p>
+            <a href='@Url.Action("Login", "Account")' class="btn btn-primary btn-lg">Iniciar Sesión &raquo;</a>
+        </p>
+    }
+</div>
+
+<div class="row">
+    @if (Request.IsAuthenticated)
+    {
+    <div class="col-md-4">
+        <h2>Proyectos</h2>
+        <p>
+            Administración de Proyectos
+        </p>
+        <p><a class="btn btn-default" href='@Url.Action("Index", "Proyectos")'>Ver Proyectos &raquo;</a></p>   
+        <p>
+            Administración de Categorias de los Proyectos
+        </p>
+        <p><a class="btn btn-default" href='@Url.Action("Index", "Categoria")'>Categorias &raquo;</a></p>
+    </div>
+        <div class="col-md-4">
+            <h2>Tareas</h2>
+            <p>Administración de Tareas</p>
+            <p><a class="btn btn-default" href='@Url.Action("Index", "Tareas")'>Ver Tareas &raquo;</a></p>
+            <p>Administración de Recursos</p>
+            <p><a class="btn btn-default" href='@Url.Action("Index", "Recurso")'>Ver Recursos &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
+            <h2>Empleados</h2>
+            <p>Administración de Empleados.</p>
+            <p><a class="btn btn-default" href='@Url.Action("Index", "Empleado")'>Ver Empleados &raquo;</a></p>
+            <p>Administración de Roles de Servicio.</p>
+            <p><a class="btn btn-default" href='@Url.Action("Index", "RolesEmp")'>Ver Roles &raquo;</a></p>
+        </div>
+    }
+</div>

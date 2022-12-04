@@ -1,0 +1,33 @@
+﻿@model Model.Domain.RolEmp
+
+@{
+    ViewBag.Title = "Detalles";
+}
+
+<h2>Detalles</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PrecioServicio)
+        </dt>
+
+        <dd>
+            $ @Html.DisplayFor(model => model.PrecioServicio)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id_Rol }, new { @class = "btn btn-warning" }) 
+    @Html.ActionLink("Volver a la Lista", "Index", "RolesEmp",  new { @class = "btn btn-primary"})
+</p>
