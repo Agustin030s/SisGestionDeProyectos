@@ -200,7 +200,8 @@ namespace Services
                                 FechInicio = ta.FechInicio,
                                 FechFin = ta.FechFin,
                                 Avance = ta.Avance,
-                                TituloProy = pro.Titulo
+                                TituloProy = pro.Titulo,
+                                Costo = ta.Costo
                             }).OrderBy(x => x.FechInicio).ToList();
                 }
 
@@ -216,7 +217,8 @@ namespace Services
                                 FechInicio = ta.FechInicio,
                                 FechFin = ta.FechFin,
                                 Avance = ta.Avance,
-                                TituloProy = pro.Titulo
+                                TituloProy = pro.Titulo,
+                                Costo = ta.Costo
                             }).OrderBy(x => x.FechInicio).ToList();
                 }
 
@@ -232,7 +234,8 @@ namespace Services
                                  FechInicio = ta.FechInicio,
                                  FechFin = ta.FechFin,
                                  Avance = ta.Avance,
-                                 TituloProy = pro.Titulo
+                                 TituloProy = pro.Titulo,
+                                 Costo = ta.Costo
                              }).OrderByDescending(x => x.Costo).ToList();
                 }
             }

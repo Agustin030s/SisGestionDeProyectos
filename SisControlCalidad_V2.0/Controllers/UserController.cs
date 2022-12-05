@@ -122,15 +122,34 @@ namespace SisGestionDeProyectos.Controllers
             return View(model);
         }
 
-        [Authorize(Roles = "Admin")]
-        public string SuperLinea()
+        public ActionResult Details(string id)
         {
-            return "Supervisor de Linea";
+            var model = userService.GetDetails(id);
+
+            return View("Details", model);
         }
-        [Authorize(Roles = "Empleado, Admin")]
-        public string SuperCalidad()
+
+        // GET: Tareas/Delete/5
+        public ActionResult Delete(string id)
         {
-            return "Supervisor de Calidad";
+            var model = userService.GetDetails(id);
+            return View(model);
+        }
+        // POST: Tareas/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(string id)
+        {
+            try
+            {
+                userService.Delete(id);
+
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
         }
     }
 }
