@@ -224,7 +224,7 @@ namespace Services
 
                 if (opcion == "4")
                 {
-                    Tarea = (from ta in db.Tareas
+                    Tarea = (from ta in db.Tareas.Where(x => x.Avance < 1)
                              from pro in db.Proyectos.Where(x => x.Id_Proyecto == ta.Id_Proyecto)
                              select new TareasGrid
                              {

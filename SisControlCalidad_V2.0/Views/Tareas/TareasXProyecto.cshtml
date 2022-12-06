@@ -49,7 +49,7 @@
 <br />
 <br />
 <p>
-    @Html.ActionLink("Gestion de Tareas", "Index", "Tareas", new { @class = "btn btn-success" })
+    @Html.ActionLink("Crear Tarea", "CrearTarea", "Tareas", new { id = @ViewBag.ProyectoGrid.Id_Proyecto }, new { @class = "btn btn-success" })
     @Html.ActionLink("Imprimir", "Imprimir", "Tareas", new { @class = "btn btn-success", @target = "_blank" })
 </p>
 <table class="table">

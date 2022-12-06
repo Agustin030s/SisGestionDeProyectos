@@ -22,7 +22,9 @@ namespace SisGestionDeProyectos.Controllers
             {
                 new SelectListItem { Text="Todos", Value="1"},
                 new SelectListItem { Text="Proyectos Atrasados", Value="2" },
-                new SelectListItem { Text="Proyectos Proximos a Iniciar", Value="3" }
+                new SelectListItem { Text="Proyectos Proximos a Iniciar", Value="3" },
+                new SelectListItem { Text="Proyectos Terminados", Value="4" },
+                new SelectListItem { Text="Mayor Costo", Value="5" }
             };
 
             ViewBag.Fecha = Fecha;
@@ -39,7 +41,9 @@ namespace SisGestionDeProyectos.Controllers
             {
                 new SelectListItem { Text="Todos", Value="1"},
                 new SelectListItem { Text="Proyectos Atrasados", Value="2" },
-                new SelectListItem { Text="Proyectos Proximos a Iniciar", Value="3" }
+                new SelectListItem { Text="Proyectos Proximos a Iniciar", Value="3" },
+                new SelectListItem { Text="Proyectos Terminados", Value="4" },
+                new SelectListItem { Text="Mayor Costo", Value="5" }
             };
 
             ViewBag.Fecha = Fecha2;

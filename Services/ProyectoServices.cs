@@ -146,7 +146,7 @@ namespace Services
 
                 if (!String.IsNullOrEmpty(palabra))
                 {
-                    proyecto = from pr in db.Proyectos.Where(x => x.Titulo.ToUpper().Contains(palabra.ToUpper()))
+                    proyecto = (from pr in db.Proyectos.Where(x => x.Titulo.ToUpper().Contains(palabra.ToUpper()))
                                from emp in db.Empleado.Where(x => x.Legajo == pr.Legajo)
                                from cat in db.Categorias.Where(x => x.Id_Categoria == pr.Id_Categoria)
                                select new ProyectosGrid
@@ -160,13 +160,13 @@ namespace Services
                                    Encargado = emp.Nombre + " " + emp.Apellido,
                                    Categoria = cat.Nombre,
                                    Costo = pr.Costo
-                               };
+                               }).ToList();
                 }
 
                 if(value == "2")
                 {
 
-                    proyecto = from pr in db.Proyectos.Where(x => x.FechFin < FechaActual && x.Avance < 1)
+                    proyecto = (from pr in db.Proyectos.Where(x => x.FechFin < FechaActual && x.Avance < 1)
                                from emp in db.Empleado.Where(x => x.Legajo == pr.Legajo)
                                from cat in db.Categorias.Where(x => x.Id_Categoria == pr.Id_Categoria)
                                select new ProyectosGrid
@@ -180,13 +180,13 @@ namespace Services
                                    Encargado = emp.Nombre + " " + emp.Apellido,
                                    Categoria = cat.Nombre,
                                    Costo = pr.Costo
-                               };
+                               }).OrderBy(x => x.FechFin).ToList();
                 }
 
                 if (value == "3")
                 {
 
-                    proyecto = from pr in db.Proyectos.Where(x => x.FechInicio > FechaActual)
+                    proyecto = (from pr in db.Proyectos.Where(x => x.FechInicio > FechaActual)
                                from emp in db.Empleado.Where(x => x.Legajo == pr.Legajo)
                                from cat in db.Categorias.Where(x => x.Id_Categoria == pr.Id_Categoria)
                                select new ProyectosGrid
@@ -200,13 +200,53 @@ namespace Services
                                    Encargado = emp.Nombre + " " + emp.Apellido,
                                    Categoria = cat.Nombre,
                                    Costo = pr.Costo
-                               };
+                               }).OrderBy(x => x.FechInicio).ToList();
                 }
 
-                proyecto = proyecto.ToList();
+                if (value == "4")
+                {
+
+                    proyecto = (from pr in db.Proyectos.Where(x => x.Avance == 1)
+                                from emp in db.Empleado.Where(x => x.Legajo == pr.Legajo)
+                                from cat in db.Categorias.Where(x => x.Id_Categoria == pr.Id_Categoria)
+                                select new ProyectosGrid
+                                {
+                                    Id_Proyecto = pr.Id_Proyecto,
+                                    Titulo = pr.Titulo,
+                                    Descripcion = pr.Descripcion,
+                                    FechInicio = pr.FechInicio,
+                                    FechFin = pr.FechFin,
+                                    Avance = pr.Avance,
+                                    Encargado = emp.Nombre + " " + emp.Apellido,
+                                    Categoria = cat.Nombre,
+                                    Costo = pr.Costo
+                                }).OrderBy(x => x.FechInicio).ToList();
+                }
+
+                if (value == "5")
+                {
+
+                    proyecto = (from pr in db.Proyectos.Where(x => x.Avance < 1)
+                                from emp in db.Empleado.Where(x => x.Legajo == pr.Legajo)
+                                from cat in db.Categorias.Where(x => x.Id_Categoria == pr.Id_Categoria)
+                                select new ProyectosGrid
+                                {
+                                    Id_Proyecto = pr.Id_Proyecto,
+                                    Titulo = pr.Titulo,
+                                    Descripcion = pr.Descripcion,
+                                    FechInicio = pr.FechInicio,
+                                    FechFin = pr.FechFin,
+                                    Avance = pr.Avance,
+                                    Encargado = emp.Nombre + " " + emp.Apellido,
+                                    Categoria = cat.Nombre,
+                                    Costo = pr.Costo
+                                }).OrderByDescending(x => x.Costo).ToList();
+                }
             }
 
-            return proyecto;
+            var result = proyecto;
+
+            return result;
         }
 
         public void UpdateAvance(int id, double Avance)

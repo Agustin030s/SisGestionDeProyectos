@@ -105,6 +105,26 @@ namespace SisGestionDeProyectos.Controllers
             return View(tarea);
         }
 
+
+        public ActionResult CrearTarea(int id)
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult CrearTarea(Tareas tarea, int id)
+        {
+            Session["IdProyecto"] = id;
+            tarea.Id_Proyecto = id;
+            if (ModelState.IsValid)
+            {
+                tareasServices.Create(tarea);
+            }
+
+            var proyecto = proyectoServices.GetEdit(id);
+            return RedirectToAction("TareasXProyecto", "Tareas", proyecto.Id_Proyecto);
+        }
+
         [Authorize(Roles = "Admin, Empleado")]
         // GET: Tareas/Edit/5
         public ActionResult Edit(int id)
@@ -170,7 +190,7 @@ namespace SisGestionDeProyectos.Controllers
             }
         }
 
-        [Authorize(Roles = "Empleado")]
+        [Authorize(Roles = "Admin, Empleado")]
         public ActionResult Reporte()
         {
             IEnumerable<TareasGrid> tareas;
