@@ -108,21 +108,25 @@ namespace SisGestionDeProyectos.Controllers
 
         public ActionResult CrearTarea(int id)
         {
+            Session["IdProyecto"] = id;
             return View();
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public ActionResult CrearTarea(Tareas tarea, int id)
         {
-            Session["IdProyecto"] = id;
+            var proy = proyectoServices.Get(id);
+            ViewBag.ProyectoGrid = proy;
+
             tarea.Id_Proyecto = id;
             if (ModelState.IsValid)
             {
                 tareasServices.Create(tarea);
+                return RedirectToAction("Index", "Proyectos");
             }
 
-            var proyecto = proyectoServices.GetEdit(id);
-            return RedirectToAction("TareasXProyecto", "Tareas", proyecto.Id_Proyecto);
+            return View(tarea);
         }
 
         [Authorize(Roles = "Admin, Empleado")]
