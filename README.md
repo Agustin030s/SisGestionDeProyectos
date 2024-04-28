@@ -1,6 +1,7 @@
 # Sistema de Gestión de Proyectos
 Este proyecto fue desarrollado utilizando:
 * .NET Framework 4.7
+* Razor Pages
 * Microsoft Identity
 * Migraciones con base de datos SQL Server
 
